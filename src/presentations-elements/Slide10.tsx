@@ -1,15 +1,7 @@
 import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { Briefcase, Building2, Mail, Phone, Send, ShieldCheck, UserRound } from 'lucide-react';
 
-type FormStatus = 'idle' | 'sending' | 'done' | 'error' | 'missing-config';
-
-const emailJsConfig = {
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  autoReplyTemplateId: import.meta.env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID,
-};
+type FormStatus = 'idle' | 'sending' | 'done' | 'error' | 'unavailable';
 
 const contactEmail = 'manojlo.share@gmail.com';
 
@@ -17,20 +9,10 @@ const Slide10Content: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>('idle');
 
-  const isConfigured =
-    Boolean(emailJsConfig.publicKey) &&
-    Boolean(emailJsConfig.serviceId) &&
-    Boolean(emailJsConfig.templateId);
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!formRef.current) {
-      return;
-    }
-
-    if (!isConfigured) {
-      setStatus('missing-config');
       return;
     }
 
@@ -47,30 +29,21 @@ const Slide10Content: React.FC = () => {
     setStatus('sending');
 
     try {
-      await emailjs.sendForm(
-        emailJsConfig.serviceId!,
-        emailJsConfig.templateId!,
-        formRef.current,
-        { publicKey: emailJsConfig.publicKey! },
-      );
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
 
-      if (emailJsConfig.autoReplyTemplateId && payload.reply_to) {
-        await emailjs.send(
-          emailJsConfig.serviceId!,
-          emailJsConfig.autoReplyTemplateId,
-          {
-            to_email: payload.reply_to,
-            to_name: payload.from_name,
-            from_name: 'JustImprove tim',
-            company_name: payload.company_name,
-            confirmation_subject: 'Potvrda prijema upita / Inquiry received',
-            confirmation_sr:
-              'Hvala sto ste nas kontaktirali. Vas upit je uspesno primljen i nas tim ce vam se javiti u najkracem mogucem roku.',
-            confirmation_en:
-              'Thank you for contacting us. We have received your inquiry and our team will get back to you as soon as possible.',
-          },
-          { publicKey: emailJsConfig.publicKey! },
-        );
+      if (response.status === 503) {
+        setStatus('unavailable');
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(`Contact request failed with status ${response.status}`);
       }
 
       setStatus('done');
@@ -86,8 +59,8 @@ const Slide10Content: React.FC = () => {
       ? 'Hvala sto ste nas kontaktirali. Vas upit je primljen i uskoro vam se javljamo. Thank you for reaching out. We have received your inquiry and will respond shortly.'
       : status === 'error'
         ? 'Poruka trenutno nije poslata. Pokusajte ponovo ili nam pisite direktno na manojlo.share@gmail.com.'
-        : status === 'missing-config'
-          ? 'Kontakt forma jos nije povezana. Dodajte EmailJS kljuceve u Netlify environment variables.'
+        : status === 'unavailable'
+          ? 'Kontakt forma trenutno nije dostupna. Pokusajte ponovo uskoro ili nam pisite direktno na manojlo.share@gmail.com.'
           : null;
 
   return (
