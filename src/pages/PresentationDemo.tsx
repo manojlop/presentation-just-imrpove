@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, X, Tag, ClipboardList, RefreshCw, BookOpen, CheckCircle, FileX, EyeOff, Clock, UserX, BarChart3, Lightbulb, ArrowLeft, ArrowRight, FolderKanban, Moon, Sun, Upload, TrendingDown, ShieldAlert } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Tag, ClipboardList, RefreshCw, BookOpen, CheckCircle, FileX, EyeOff, Clock, UserX, BarChart3, Lightbulb, ArrowLeft, ArrowRight, FolderKanban, Moon, Sun, Upload, TrendingDown, ShieldAlert, Gauge, ShieldCheck, UserCheck, Zap } from 'lucide-react';
 import Slide4Content from '../presentations-elements/Slide4';
 import Slide5Content from '../presentations-elements/Slide5';
 import IdeaManagementSlide from '../presentations-elements/IdeaManagementSlide';
@@ -333,6 +333,72 @@ const challengeCards = [
   },
 ];
 
+const solutionOutcomeCards = [
+  {
+    icon: Gauge,
+    eyebrow: 'Pouzdanost i odziv',
+    title: 'Manje downtime-a i brza reakcija',
+    description: 'Tagovi, akcije i rutine ubrzavaju detekciju i plansko zatvaranje uzroka.',
+    details: ['Downtime ↓ 20-50%', 'Vreme reakcije ↓ 2-5x', 'Ponavljajuci kvarovi ↓ 30%'],
+    impactLabel: 'Tacan efekat na ponovljeni kvar',
+    impactValue: '~€3.000+',
+    impactNote: 'Kod kvara od ~€10.000+, 30% manje ponavljanja vraca ~€3.000+.',
+  },
+  {
+    icon: ShieldCheck,
+    eyebrow: 'Bezbednost i uskladjenost',
+    title: 'Manje incidenata, manje teških posledica',
+    description: 'Brza prijava rizika i jasna eskalacija smanjuju sansu za skuplji incident.',
+    details: ['Incidenti ↓ 30-70%', 'Brza eskalacija i dokumentacija'],
+    impactLabel: 'Direktno smanjenje troska',
+    impactValue: '~€3.000-€7.000+',
+    impactNote: 'Kod incidenta od ~€10.000+, pad ucestalosti od 30-70% vraca ~€3.000-€7.000+.',
+  },
+  {
+    icon: UserCheck,
+    eyebrow: 'Ljudi i znanje',
+    title: 'Brzi onboarding i manja zavisnost od pojedinaca',
+    description: 'Baza znanja i standardizovan tok rada skracuju uvodjenje u posao kada kljucna osoba nije dostupna.',
+    details: ['Onboarding brzi 30-50%', 'Zavisnost od pojedinaca ↓'],
+    impactLabel: 'Povrat po kriticnoj zameni',
+    impactValue: '~€1.500-€2.500+',
+    impactNote: 'Kod troska od ~€5.000+, 30-50% brzi onboarding vraca ~€1.500-€2.500+.',
+  },
+];
+
+const solutionToolCards = [
+  {
+    icon: Tag,
+    title: 'Tagovi',
+    description: 'Digitalna prijava problema sa slikama, opisom i automatskom evidencijom',
+  },
+  {
+    icon: ClipboardList,
+    title: 'Akcije',
+    description: 'Korektivne i preventivne akcije sa jasnim rokovima i odgovornostima',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Rutine',
+    description: 'Proaktivne provere i preventivno odrzavanje sa checklist sistemom',
+  },
+  {
+    icon: FolderKanban,
+    title: 'Projekti',
+    description: 'Upravljanje kompleksnim projektima sa pracenjem napretka i resursa',
+  },
+  {
+    icon: BookOpen,
+    title: 'Baza Znanja',
+    description: 'Centralizovana baza dokumentacije, SOP-ova, video uputstava i dijagrama',
+  },
+  {
+    icon: BarChart3,
+    title: 'Izvestaji',
+    description: 'Detaljna analitika, KPI-jevi i izvestaji za donosenje informisanih odluka',
+  },
+];
+
 const slides = [
   // Slide 1: Naslov
   {
@@ -435,73 +501,92 @@ const slides = [
     id: 3,
     content: (
       <div className="h-full flex items-center justify-center px-3 sm:px-6 py-4 overflow-y-auto">
-        <div className="w-full max-w-6xl mx-auto space-y-4 sm:space-y-6">
+        <div className="w-full max-w-7xl mx-auto space-y-4 sm:space-y-5">
           <div className="text-center space-y-1 sm:space-y-2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white transition-colors">Rešenje</h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-white transition-colors px-2">
-              JustImprove digitalizuje proces kontinualnog unapređenja kroz kompletan ekosistem alata
+              JustImprove ne donosi samo vidljivost, vec merljivo smanjuje trosak, rizik i zavisnost od haosa
             </p>
+            <p className="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300 transition-colors px-2">Prikazane cifre predstavljaju direktan efekat po incidentu ili po kriticnoj situaciji.</p>
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            <div className="text-center space-y-2 sm:space-y-3 p-3 sm:p-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto">
-                <Tag className="w-5 h-5 sm:w-6 sm:h-6 text-white" strokeWidth={2} />
+
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-4">
+            {solutionOutcomeCards.map(({ icon: Icon, eyebrow, title, description, details, impactLabel, impactValue, impactNote }) => (
+              <div
+                key={title}
+                className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 p-4 sm:p-5 shadow-sm transition-colors dark:border-emerald-900/70 dark:from-emerald-950/40 dark:via-gray-900 dark:to-cyan-950/20"
+              >
+                <div className="mb-4 flex items-start justify-between gap-3">
+                  <div className="space-y-2">
+                    <span className="inline-flex rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-200">
+                      {eyebrow}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{title}</h3>
+                  </div>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/80 text-emerald-700 shadow-sm dark:bg-gray-900/70 dark:text-emerald-200">
+                    <Icon className="h-5 w-5" strokeWidth={2.2} />
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-[15px] leading-relaxed text-gray-600 dark:text-gray-200">
+                  {description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {details.map((detail) => (
+                    <span
+                      key={detail}
+                      className="rounded-full border border-emerald-200 bg-white/90 px-2.5 py-1 text-xs font-medium text-gray-700 dark:border-emerald-900/70 dark:bg-gray-900/70 dark:text-gray-200"
+                    >
+                      {detail}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-4 rounded-xl bg-gray-950 px-4 py-3 text-white dark:bg-gray-950/90">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-200">{impactLabel}</div>
+                  <div className="mt-1 text-2xl font-bold text-emerald-300">{impactValue}</div>
+                  <p className="mt-1 text-xs leading-relaxed text-gray-300">{impactNote}</p>
+                </div>
               </div>
-              <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white transition-colors">Tagovi</h3>
-              <p className="text-xs text-gray-600 dark:text-white leading-relaxed transition-colors">
-                Digitalna prijava problema sa slikama, opisom i automatskom evidencijom
-              </p>
+            ))}
+          </div>
+
+          <div className="rounded-2xl border border-blue-200 bg-gradient-to-r from-slate-900 via-blue-950 to-emerald-950 px-5 py-4 text-white shadow-sm dark:border-blue-900/60">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-100">
+                  <Zap className="h-3.5 w-3.5" strokeWidth={2.2} />
+                  Ukupan ROI potencijal
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold">~€30.000-€50.000+ godisnjeg direktnog povrata</h3>
+                <p className="text-sm text-blue-100/90">Aproksimacija na godisnjem nivou, uz 1 smanjen / sprecen scenario mesecno.</p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
+                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Konzervativna procena zasnovana na tri tipicna scenarija kroz 12 meseci</div>
+                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Bez uracunatog praznog hoda, reputacije, manjeg turnover-a i sirih organizacionih efekata</div>
+                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Stvarni ROI raste kako raste broj prijava, smena, linija i lokacija</div>
+              </div>
             </div>
-            
-            <div className="text-center space-y-3 p-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto">
-                <ClipboardList className="w-6 h-6 text-white" strokeWidth={2} />
-              </div>
-              <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Akcije</h3>
-              <p className="text-xs text-gray-600 dark:text-white leading-relaxed transition-colors">
-                Korektivne i preventivne akcije sa jasnim rokovima i odgovornostima
-              </p>
-            </div>
-            
-            <div className="text-center space-y-3 p-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto">
-                <RefreshCw className="w-6 h-6 text-white" strokeWidth={2} />
-              </div>
-              <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Rutine</h3>
-              <p className="text-xs text-gray-600 dark:text-white leading-relaxed transition-colors">
-                Proaktivne provere i preventivno održavanje sa checklist sistemom
-              </p>
-            </div>
-            
-            <div className="text-center space-y-3 p-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto">
-                <FolderKanban className="w-6 h-6 text-white" strokeWidth={2} />
-              </div>
-              <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Projekti</h3>
-              <p className="text-xs text-gray-600 dark:text-white leading-relaxed transition-colors">
-                Upravljanje kompleksnim projektima sa praćenjem napretka i resursa
-              </p>
-            </div>
-            
-            <div className="text-center space-y-3 p-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto">
-                <BookOpen className="w-6 h-6 text-white" strokeWidth={2} />
-              </div>
-              <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Baza Znanja</h3>
-              <p className="text-xs text-gray-600 dark:text-white leading-relaxed transition-colors">
-                Centralizovana baza dokumentacije, SOP-ova, video uputstava i dijagrama
-              </p>
-            </div>
-            
-            <div className="text-center space-y-3 p-4 bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-xl hover:border-blue-500 dark:hover:border-blue-500 transition-colors">
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mx-auto">
-                <BarChart3 className="w-6 h-6 text-white" strokeWidth={2} />
-              </div>
-              <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Izveštaji</h3>
-              <p className="text-xs text-gray-600 dark:text-white leading-relaxed transition-colors">
-                Detaljna analitika, KPI-jev i izveštaji za donošenje informisanih odluka
-              </p>
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-center text-xs sm:text-sm font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+              Alati kojima se do ovih rezultata stize
+            </p>
+
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-2 sm:gap-2.5">
+              {solutionToolCards.map(({ icon: Icon, title }) => (
+                <div
+                  key={title}
+                  className="flex flex-col items-center justify-center gap-2 p-2.5 sm:p-3 bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-900/50 rounded-xl transition-colors"
+                >
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                    <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white" strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xs sm:text-sm font-bold text-center text-gray-900 dark:text-white transition-colors">{title}</h3>
+                </div>
+              ))}
             </div>
           </div>
         </div>
