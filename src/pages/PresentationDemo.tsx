@@ -665,6 +665,8 @@ export const PresentationDemo: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
+  const contactSlideIndex = slides.length - 1;
+  const isContactSlide = currentSlide === contactSlideIndex;
 
   // Apply dark mode class to document root
   useEffect(() => {
@@ -713,6 +715,13 @@ export const PresentationDemo: React.FC = () => {
           </div>
           
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentSlide(contactSlideIndex)}
+              className="inline-flex items-center justify-center rounded-lg border border-blue-200 bg-blue-50 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-100 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-200 dark:hover:bg-blue-900/50"
+            >
+              Kontakt
+            </button>
+
             {/* Dark Mode Toggle */}
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
@@ -738,7 +747,7 @@ export const PresentationDemo: React.FC = () => {
 
       {/* Main Content */}
       <div className="h-full flex items-center justify-center pt-16 sm:pt-20 pb-16 sm:pb-20 px-3 sm:px-6 bg-white dark:bg-gray-900 transition-colors overflow-y-auto">
-        <div className="w-full max-w-7xl mx-auto h-full">
+        <div className={`w-full mx-auto h-full ${isContactSlide ? 'max-w-6xl' : 'max-w-7xl'}`}>
           <div
             key={slides[currentSlide].id}
             className="animate-fade-in h-full"
