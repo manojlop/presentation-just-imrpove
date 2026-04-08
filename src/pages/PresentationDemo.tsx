@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, X, Tag, ClipboardList, RefreshCw, BookOpen, CheckCircle, FileX, EyeOff, Clock, UserX, BarChart3, Lightbulb, ArrowLeft, ArrowRight, FolderKanban, Moon, Sun, Upload } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Tag, ClipboardList, RefreshCw, BookOpen, CheckCircle, FileX, EyeOff, Clock, UserX, BarChart3, Lightbulb, ArrowLeft, ArrowRight, FolderKanban, Moon, Sun, Upload, TrendingDown, ShieldAlert } from 'lucide-react';
 import Slide4Content from '../presentations-elements/Slide4';
 import Slide5Content from '../presentations-elements/Slide5';
 import IdeaManagementSlide from '../presentations-elements/IdeaManagementSlide';
@@ -267,6 +267,72 @@ const Slide6Content: React.FC = () => {
   );
 };
 
+const challengeImpactCards = [
+  {
+    icon: TrendingDown,
+    eyebrow: 'Direktan gubitak',
+    title: 'Kasno primecen prestanak rada masine',
+    description: 'Saniranje tek jedan dan kasnije povlaci ozbiljan pad proizvodnje i direktan finansijski gubitak.',
+    details: ['1/3 masine van rada', '33% proizvodnje', '500.000 L/dan x 0.33 x €0.30/L prihoda'],
+    impactLabel: 'Realan trosak zastoja',
+    impactValue: '~€10.000+',
+    impactNote: 'Samo izgubljeni profit pri 20% marze, bez uracunatog praznog hoda radnika',
+  },
+  {
+    icon: ShieldAlert,
+    eyebrow: 'Bezbednoski rizik',
+    title: 'Nebezbedna situacija',
+    description: 'Jedan previd moze da preraste u povredu, kaznu i prekid procesa koji dodatno povecava trosak.',
+    details: ['Povreda radnika', 'Kazna i inspekcija', 'Prestanak rada'],
+    impactLabel: 'Ukupan udar',
+    impactValue: '~€10.000+',
+    impactNote: 'Direktan trosak incidenta pre nego sto uracunamo reputacioni i organizacioni efekat.',
+  },
+  {
+    icon: UserX,
+    eyebrow: 'Znanje van sistema',
+    title: 'Odlazak ili bolovanje glavnog radnika',
+    description: 'Kada kljucno tribalno znanje ostane kod jednog coveka, tim ulazi u period sporijeg rada i dodatnog treninga.',
+    details: ['Pad efikasnosti 20-50%', 'Onboarding i new hire', 'Trening i uvodjenje u posao'],
+    impactLabel: 'Organizacioni trosak',
+    impactValue: '~€5.000+',
+    impactNote: 'Gubitak efikasnosti plus trosak uvodjenja zamene dok se znanje prenosi.',
+  },
+];
+
+const challengeCards = [
+  {
+    icon: FileX,
+    title: 'Papirna dokumentacija',
+    description: 'Primedbe, tagovi i predlozi za poboljsanje se gube, nema pracenja statusa i istorije promena',
+  },
+  {
+    icon: EyeOff,
+    title: 'Nedostatak transparentnosti',
+    description: 'Menadzment nema uvid u aktuelne probleme i napredak njihovog resavanja',
+  },
+  {
+    icon: Clock,
+    title: 'Sporija reakcija',
+    description: 'Problemi se resavaju kasno ili nikada, nedostaju jasni rokovi i odgovornosti',
+  },
+  {
+    icon: UserX,
+    title: 'Nedostaje odgovornost',
+    description: 'Nije jasno ko je odgovoran i sta je uradjeno po svakom problemu',
+  },
+  {
+    icon: BarChart3,
+    title: 'Nema podataka i analitike',
+    description: 'Bez KPI-jeva, trendova i mogucnosti za merenje napretka i optimizaciju procesa',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Predlozi za poboljsanje',
+    description: 'Dobri predlozi radnika se gube ili se ne implementiraju zbog nedostatka sistema za pracenje',
+  },
+];
+
 const slides = [
   // Slide 1: Naslov
   {
@@ -290,59 +356,73 @@ const slides = [
     id: 2,
     content: (
       <div className="h-full flex items-center justify-center px-3 sm:px-8 py-4 overflow-y-auto">
-        <div className="w-full max-w-6xl mx-auto space-y-4 sm:space-y-6">
+        <div className="w-full max-w-7xl mx-auto space-y-4 sm:space-y-5">
           <div className="text-center space-y-1 sm:space-y-2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white transition-colors">Izazovi</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-white transition-colors px-2">Sa čim se fabrike danas suočavaju?</p>
+            <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-white transition-colors px-2">Sa cim se fabrike danas suocavaju i koliko ih to realno kosta?</p>
+            <p className="text-xs sm:text-sm font-medium text-red-600 dark:text-red-300 transition-colors px-2">Sve navedene cifre su po incidentu.</p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            <div className="bg-white dark:bg-gray-800 border-2 border-red-700 dark:border-red-600 rounded-xl p-4 hover:border-red-800 dark:hover:border-red-500 transition-colors">
-              <div className="flex items-start gap-3 mb-3">
-                <FileX className="w-5 h-5 text-gray-600 dark:text-gray-400 flex-shrink-0 mt-0.5 transition-colors" strokeWidth={2} />
-                <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Papirna dokumentacija</h3>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-4">
+            {challengeImpactCards.map(({ icon: Icon, eyebrow, title, description, details, impactLabel, impactValue, impactNote }) => (
+              <div
+                key={title}
+                className="rounded-2xl border border-red-200 bg-gradient-to-br from-red-50 via-white to-orange-50 p-4 sm:p-5 shadow-sm transition-colors dark:border-red-900/70 dark:from-red-950/40 dark:via-gray-900 dark:to-orange-950/20"
+              >
+                <div className="mb-4 flex items-start justify-between gap-3">
+                  <div className="space-y-2">
+                    <span className="inline-flex rounded-full bg-red-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-red-700 dark:bg-red-900/60 dark:text-red-200">
+                      {eyebrow}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">{title}</h3>
+                  </div>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/80 text-red-700 shadow-sm dark:bg-gray-900/70 dark:text-red-200">
+                    <Icon className="h-5 w-5" strokeWidth={2.2} />
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-[15px] leading-relaxed text-gray-600 dark:text-gray-200">
+                  {description}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {details.map((detail) => (
+                    <span
+                      key={detail}
+                      className="rounded-full border border-red-200 bg-white/90 px-2.5 py-1 text-xs font-medium text-gray-700 dark:border-red-900/70 dark:bg-gray-900/70 dark:text-gray-200"
+                    >
+                      {detail}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-4 rounded-xl bg-gray-950 px-4 py-3 text-white dark:bg-gray-950/90">
+                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-200">{impactLabel}</div>
+                  <div className="mt-1 text-2xl font-bold text-red-400 dark:text-red-300">{impactValue}</div>
+                  <p className="mt-1 text-xs leading-relaxed text-gray-300">{impactNote}</p>
+                </div>
               </div>
-              <p className="text-sm text-gray-600 dark:text-white leading-relaxed transition-colors">Primedbe, tagovi i predlozi za poboljšanje se gube, nema praćenja statusa i istorije promena</p>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 border-2 border-red-700 dark:border-red-600 rounded-xl p-4 hover:border-red-800 dark:hover:border-red-500 transition-colors">
-              <div className="flex items-start gap-3 mb-3">
-                <EyeOff className="w-5 h-5 text-gray-600 dark:text-white flex-shrink-0 mt-0.5 transition-colors" strokeWidth={2} />
-                <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Nedostatak transparentnosti</h3>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-white leading-relaxed transition-colors">Menadžment nema uvid u aktuelne probleme i napredak njihovog rešavanja</p>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 border-2 border-red-700 dark:border-red-600 rounded-xl p-4 hover:border-red-800 dark:hover:border-red-500 transition-colors">
-              <div className="flex items-start gap-3 mb-3">
-                <Clock className="w-5 h-5 text-gray-600 dark:text-white flex-shrink-0 mt-0.5 transition-colors" strokeWidth={2} />
-                <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Sporija reakcija</h3>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-white leading-relaxed transition-colors">Problemi se rešavaju kasno ili nikada, nedostaju jasni rokovi i odgovornosti</p>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 border-2 border-red-700 dark:border-red-600 rounded-xl p-4 hover:border-red-800 dark:hover:border-red-500 transition-colors">
-              <div className="flex items-start gap-3 mb-3">
-                <UserX className="w-5 h-5 text-gray-600 dark:text-white flex-shrink-0 mt-0.5 transition-colors" strokeWidth={2} />
-                <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Nedostaje odgovornost</h3>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-white leading-relaxed transition-colors">Nije jasno ko je odgovoran i šta je urađeno po svakom problemu</p>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 border-2 border-red-700 dark:border-red-600 rounded-xl p-4 hover:border-red-800 dark:hover:border-red-500 transition-colors">
-              <div className="flex items-start gap-3 mb-3">
-                <BarChart3 className="w-5 h-5 text-gray-600 dark:text-white flex-shrink-0 mt-0.5 transition-colors" strokeWidth={2} />
-                <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Nema podataka i analitike</h3>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-white leading-relaxed transition-colors">Bez KPI-jeva, trendova i mogućnosti za merenje napretka i optimizaciju procesa</p>
-            </div>
-            
-            <div className="bg-white dark:bg-gray-800 border-2 border-red-700 dark:border-red-600 rounded-xl p-4 hover:border-red-800 dark:hover:border-red-500 transition-colors">
-              <div className="flex items-start gap-3 mb-3">
-                <Lightbulb className="w-5 h-5 text-gray-600 dark:text-white flex-shrink-0 mt-0.5 transition-colors" strokeWidth={2} />
-                <h3 className="text-base font-bold text-gray-900 dark:text-white transition-colors">Predlozi za poboljšanje</h3>
-              </div>
-              <p className="text-sm text-gray-600 dark:text-white leading-relaxed transition-colors">Dobri predlozi radnika se gube ili se ne implementiraju zbog nedostatka sistema za praćenje</p>
+            ))}
+          </div>
+
+          <div className="space-y-2">
+            <p className="text-center text-xs sm:text-sm font-medium uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400">
+              Operativni izazovi koji stoje iza ovih posledica
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5 sm:gap-3">
+              {challengeCards.map(({ icon: Icon, title, description }) => (
+                <div
+                  key={title}
+                  className="bg-white dark:bg-gray-800 border border-red-200 dark:border-red-900/60 rounded-xl p-3 sm:p-3.5 transition-colors"
+                >
+                  <div className="flex items-start gap-2.5 mb-2">
+                    <Icon className="w-4 h-4 text-gray-600 dark:text-gray-300 flex-shrink-0 mt-0.5 transition-colors" strokeWidth={2} />
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white transition-colors">{title}</h3>
+                  </div>
+                  <p className="text-xs sm:text-[13px] text-gray-600 dark:text-gray-300 leading-relaxed transition-colors">{description}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
