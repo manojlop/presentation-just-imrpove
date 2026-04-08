@@ -1,0 +1,40 @@
+{
+  "copiedAt": "2026-04-08T21:31:12.755Z",
+  "sourceRoot": "/home/manojlo/org/projects/cidemo/continuous-improvement-demo",
+  "destinationRoot": "/home/manojlo/org/projects/presentation-just-improve",
+  "copiedFiles": [
+    "package.json",
+    "index.html",
+    "tailwind.config.js",
+    "postcss.config.js",
+    "tsconfig.json",
+    "tsconfig.node.json",
+    "vite.config.ts",
+    "src/vite-env.d.ts",
+    "src/index.css",
+    "src/pages/PresentationDemo.tsx",
+    "src/presentations-elements/Slide4.tsx",
+    "src/presentations-elements/Slide5.tsx",
+    "src/presentations-elements/IdeaManagementSlide.tsx",
+    "src/presentations-elements/Slide8.tsx",
+    "src/presentations-elements/Slide9.tsx",
+    "src/presentations-elements/Slide10.tsx",
+    "src/presentations-elements/SlideKnowledgeCapture.tsx",
+    "src/presentations-elements/TagsSlides.tsx",
+    "src/presentations-elements/TagExamples.tsx",
+    "src/data/mockData.ts",
+    "src/data/generateMockData.ts",
+    "src/types/index.ts",
+    "src/images/andrej (1).jpeg",
+    "src/images/marija (2).jpeg",
+    "src/images/mica (1).jpg",
+    "src/images/vlada.jpeg",
+    "src/images/fa28c6de-4a84-4e88-b663-b7011a801c73 (1) (1).jpg",
+    "public/vite.svg"
+  ],
+  "missingFiles": [],
+  "notes": [
+    "This copies the PresentationDemo source graph and supporting assets/config files.",
+    "It does not rewrite imports, route usage, or external image/video URLs."
+  ]
+}

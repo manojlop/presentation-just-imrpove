@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 dark:bg-[#191919] text-gray-900 dark:text-gray-100 transition-colors;
+  }
+}
+
+@layer utilities {
+  /* Desktop font size reduction */
+  @media (min-width: 1024px) {
+    html {
+      font-size: 13px;
+    }
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-sidebar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 3px;
+  }
+
+  .scrollbar-sidebar:hover::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.3);
+  }
+
+  .dark .scrollbar-sidebar:hover::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.5);
+  }
+
+  .scrollbar-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+
+  .scrollbar-sidebar:hover {
+    scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+  }
+
+  .dark .scrollbar-sidebar:hover {
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+    background-color: rgb(209 213 219);
+    border-radius: 3px;
+  }
+
+  .scrollbar-track-gray-100::-webkit-scrollbar-track {
+    background-color: rgb(243 244 246);
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotate(var(--rotation, 0deg));
+    }
+    50% {
+      transform: translateY(-20px) rotate(var(--rotation, 0deg));
+    }
+  }
+
+  @keyframes float-centered {
+    0%, 100% {
+      transform: translateY(-50%) translateY(0px) rotate(var(--rotation, 0deg));
+    }
+    50% {
+      transform: translateY(-50%) translateY(-20px) rotate(var(--rotation, 0deg));
+    }
+  }
+
+  .animate-float {
+    animation: float var(--duration, 6s) ease-in-out infinite;
+    will-change: transform;
+    --rotation: 0deg;
+  }
+
+  .animate-float-centered {
+    animation: float-centered var(--duration, 6s) ease-in-out infinite;
+    will-change: transform;
+    --rotation: 0deg;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 dark:bg-gray-700 text-white dark:text-gray-100 px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-gray-600 transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-4 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors;
+  }
+
+  .card {
+    @apply bg-white dark:bg-[#242424] rounded-lg shadow-sm border border-gray-200 dark:border-gray-800;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#242424] text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-blue-500 focus:border-transparent;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-open {
+    @apply bg-blue-100 text-blue-800;
+  }
+
+  .badge-in-progress {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+
+  .badge-done {
+    @apply bg-blue-100 text-blue-800;
+  }
+
+  .badge-canceled {
+    @apply bg-gray-100 text-gray-800;
+  }
+}
+
