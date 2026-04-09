@@ -66,7 +66,7 @@ function validatePayload(payload) {
   );
 }
 
-async function sendEmail({ publicKey, privateKey, serviceId, templateId, templateParams }) {
+async function sendEmail({ publicKey, privateKey, serviceId, templateId, templateParams, sendType }) {
   const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
     method: 'POST',
     headers: {
@@ -92,6 +92,7 @@ async function sendEmail({ publicKey, privateKey, serviceId, templateId, templat
     providerMessage: message,
     templateId,
     serviceId,
+    sendType,
   });
 }
 
@@ -124,25 +125,32 @@ export async function submitContactInquiry(body, env = process.env) {
     serviceId: config.serviceId,
     templateId: config.templateId,
     templateParams: payload,
+    sendType: 'inquiry',
   });
 
   if (config.autoReplyTemplateId && payload.reply_to) {
-    await sendEmail({
-      publicKey: config.publicKey,
-      privateKey: config.privateKey,
-      serviceId: config.serviceId,
-      templateId: config.autoReplyTemplateId,
-      templateParams: {
-        to_email: payload.reply_to,
-        to_name: payload.from_name,
-        from_name: 'JustImprove tim',
-        company_name: payload.company_name,
-        contact_email: contactEmail,
-        confirmation_subject: confirmationSubject,
-        confirmation_sr: confirmationMessageSr,
-        confirmation_en: confirmationMessageEn,
-      },
-    });
+    try {
+      await sendEmail({
+        publicKey: config.publicKey,
+        privateKey: config.privateKey,
+        serviceId: config.serviceId,
+        templateId: config.autoReplyTemplateId,
+        templateParams: {
+          to_email: payload.reply_to,
+          reply_to: payload.reply_to,
+          to_name: payload.from_name,
+          from_name: 'JustImprove tim',
+          company_name: payload.company_name,
+          contact_email: contactEmail,
+          confirmation_subject: confirmationSubject,
+          confirmation_sr: confirmationMessageSr,
+          confirmation_en: confirmationMessageEn,
+        },
+        sendType: 'auto-reply',
+      });
+    } catch (error) {
+      console.error('Auto-reply email failed', error);
+    }
   }
 
   return {
