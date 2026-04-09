@@ -9,6 +9,7 @@ import Slide9Content from '../presentations-elements/Slide9';
 import Slide10Content from '../presentations-elements/Slide10';
 import SlideKnowledgeCapture from '../presentations-elements/SlideKnowledgeCapture';
 import Slide12Reports from '../presentations-elements/Slide12Reports';
+import Slide13Integrations from '../presentations-elements/Slide13Integrations';
 import { AllTagsSlideContent, MyTagsSlideContent } from '../presentations-elements/TagsSlides';
 
 // ActionExamples and Slide5Content moved to Slide5.tsx
@@ -654,9 +655,15 @@ const slides = [
     content: <Slide9Content />,
   },
   
-  // Slide 14: Call to Action
+  // Slide 14: Integracije
   {
     id: 14,
+    content: <Slide13Integrations />,
+  },
+
+  // Slide 15: Call to Action
+  {
+    id: 15,
     content: <Slide10Content />,
   },
 ];
