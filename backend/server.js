@@ -53,7 +53,10 @@ async function handleContactRequest(request, response) {
     sendJson(response, result.statusCode, result.body);
   } catch (error) {
     console.error('Contact request failed', error);
-    sendJson(response, 500, { error: 'Unexpected server error.' });
+    sendJson(response, error.statusCode || 500, {
+      error: error.message || 'Unexpected server error.',
+      details: error.details || null,
+    });
   }
 }
 

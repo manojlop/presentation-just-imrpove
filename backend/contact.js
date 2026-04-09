@@ -12,6 +12,15 @@ const requiredConfigKeys = [
   'EMAILJS_TEMPLATE_ID',
 ];
 
+class ContactRequestError extends Error {
+  constructor(message, statusCode, details) {
+    super(message);
+    this.name = 'ContactRequestError';
+    this.statusCode = statusCode;
+    this.details = details;
+  }
+}
+
 function readConfig(env = process.env) {
   return {
     publicKey: env.EMAILJS_PUBLIC_KEY,
@@ -75,7 +84,13 @@ async function sendEmail({ publicKey, serviceId, templateId, templateParams }) {
   }
 
   const message = await response.text();
-  throw new Error(`EmailJS request failed with status ${response.status}: ${message}`);
+  throw new ContactRequestError('Email delivery failed.', 502, {
+    provider: 'EmailJS',
+    providerStatus: response.status,
+    providerMessage: message,
+    templateId,
+    serviceId,
+  });
 }
 
 export async function submitContactInquiry(body, env = process.env) {

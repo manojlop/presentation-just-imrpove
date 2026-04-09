@@ -26,11 +26,14 @@ export async function handler(event) {
     console.error('Netlify contact function failed', error);
 
     return {
-      statusCode: 500,
+      statusCode: error.statusCode || 500,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-      body: JSON.stringify({ error: 'Unexpected server error.' }),
+      body: JSON.stringify({
+        error: error.message || 'Unexpected server error.',
+        details: error.details || null,
+      }),
     };
   }
 }

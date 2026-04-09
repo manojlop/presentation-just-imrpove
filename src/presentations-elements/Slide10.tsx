@@ -43,7 +43,21 @@ const Slide10Content: React.FC = () => {
       }
 
       if (!response.ok) {
-        throw new Error(`Contact request failed with status ${response.status}`);
+        let errorMessage = `Contact request failed with status ${response.status}`;
+
+        try {
+          const errorPayload = await response.json();
+          if (errorPayload?.error) {
+            errorMessage = `${errorMessage}: ${errorPayload.error}`;
+          }
+          if (errorPayload?.details) {
+            console.error('Contact request details', errorPayload.details);
+          }
+        } catch {
+          // Ignore JSON parse errors and keep the generic message.
+        }
+
+        throw new Error(errorMessage);
       }
 
       setStatus('done');
