@@ -150,7 +150,7 @@ const RoutineExamples: React.FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-5 space-y-3 sm:space-y-4 flex flex-col max-h-[350px] sm:max-h-[450px] transition-colors">
+    <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-5 space-y-3 sm:space-y-4 flex flex-col max-h-[350px] sm:max-h-[450px] max-sm:max-h-none transition-colors">
       {/* Navigation */}
       <div className="flex items-center justify-between pb-2 sm:pb-3 border-b border-gray-200 dark:border-gray-700 flex-shrink-0 transition-colors">
         <button
@@ -405,12 +405,12 @@ const slides = [
   {
     id: 1,
     content: (
-      <div className="h-full flex items-center justify-center px-8">
+      <div className="h-full flex items-center justify-center px-4 sm:px-8">
         <div className="text-center space-y-8 mx-auto">
-          <h1 className="text-6xl md:text-8xl font-bold text-gray-900 dark:text-white transition-colors">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold text-gray-900 dark:text-white transition-colors">
             Just<span className="text-blue-500">Improve</span>
           </h1>
-          <p className="text-xl md:text-3xl text-gray-600 dark:text-white max-w-3xl mx-auto transition-colors">
+          <p className="text-base sm:text-xl md:text-3xl text-gray-600 dark:text-white max-w-3xl mx-auto transition-colors">
             Digitalno rešenje za <span className="text-blue-500 font-semibold">kontinualno unapređenje</span>
           </p>
         </div>
@@ -753,13 +753,13 @@ export const PresentationDemo: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="h-full flex items-center justify-center pt-16 sm:pt-20 pb-16 sm:pb-20 px-3 sm:px-6 bg-white dark:bg-gray-900 transition-colors overflow-y-auto">
-        <div className={`w-full mx-auto h-full ${isContactSlide ? 'max-w-6xl' : 'max-w-7xl'}`}>
+      <div className="h-full flex items-start sm:items-center justify-center pt-16 sm:pt-20 pb-16 sm:pb-20 px-3 sm:px-6 bg-white dark:bg-gray-900 transition-colors overflow-y-auto">
+        <div className={`w-full mx-auto h-full max-sm:h-auto max-sm:min-h-full ${isContactSlide ? 'max-w-6xl' : 'max-w-7xl'}`}>
           <div
             key={slides[currentSlide].id}
-            className="animate-fade-in h-full"
+            className="animate-fade-in h-full max-sm:h-auto max-sm:min-h-full"
           >
-            <div className="h-full flex items-center justify-center">
+            <div className="h-full flex items-center justify-center max-sm:h-auto max-sm:min-h-full max-sm:items-start">
               {slides[currentSlide].content}
             </div>
           </div>

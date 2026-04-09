@@ -102,7 +102,7 @@ const ActionExamples: React.FC = () => {
   const currentAction = defaultActions[currentIndex];
 
   return (
-    <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-6 h-[400px] sm:h-[480px] w-full max-w-[350px] sm:max-w-[400px] mx-auto flex flex-col transition-colors relative">
+    <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-6 h-[400px] sm:h-[480px] w-full max-w-[350px] sm:max-w-[400px] max-sm:h-auto max-sm:max-w-full mx-auto flex flex-col transition-colors relative">
       {/* Navigation - fixed */}
       <div className="flex items-center justify-between flex-shrink-0">
         <button

@@ -224,7 +224,7 @@ const TagExamples: React.FC<TagExamplesProps> = ({ tags = defaultTags }) => {
 
   if (tags.length === 0) {
     return (
-      <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 h-[480px] w-[400px] flex items-center justify-center">
+      <div className="bg-white border-2 border-gray-200 rounded-2xl p-6 h-[480px] w-[400px] max-sm:h-auto max-sm:min-h-[18rem] max-sm:w-full max-sm:max-w-full flex items-center justify-center">
         <p className="text-gray-500">Nema tagova</p>
       </div>
     );
@@ -262,7 +262,7 @@ const TagExamples: React.FC<TagExamplesProps> = ({ tags = defaultTags }) => {
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return (
-    <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-6 h-[400px] sm:h-[480px] w-full max-w-[350px] sm:max-w-[400px] mx-auto flex flex-col transition-colors">
+    <div className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 rounded-2xl p-3 sm:p-6 h-[400px] sm:h-[480px] w-full max-w-[350px] sm:max-w-[400px] max-sm:h-auto max-sm:max-w-full mx-auto flex flex-col transition-colors">
       {/* Navigation */}
       <div className="flex items-center justify-between flex-shrink-0">
         <button

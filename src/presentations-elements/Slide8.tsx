@@ -749,15 +749,15 @@ const Slide8Content: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-full relative overflow-hidden w-full overflow-y-auto">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center space-y-2 sm:space-y-4 px-3 sm:px-4">
+    <div className="h-full relative overflow-hidden w-full overflow-y-auto max-sm:overflow-visible max-sm:px-3 max-sm:py-4">
+      <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 text-center space-y-2 sm:space-y-4 px-3 sm:px-4 max-sm:static max-sm:translate-x-0 max-sm:translate-y-0 max-sm:px-0">
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white transition-colors">Baza Znanja</h2>
         <p className="text-sm sm:text-lg md:text-xl text-gray-600 dark:text-white max-w-2xl mx-auto leading-relaxed px-2 transition-colors">
           Centralizovani repozitorijum za SOP-ove, uputstva i dokumentaciju, direktno povezanu sa tagovima iz proizvodnje
         </p>
       </div>
 
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 max-sm:static max-sm:mt-6 max-sm:grid max-sm:grid-cols-1 max-sm:gap-3">
         {featuredArticles.map((article) => {
           const Icon = getIcon(article.type);
           const isPrimary = article.accent === 'primary';
@@ -766,7 +766,7 @@ const Slide8Content: React.FC = () => {
             <button
               key={article.id}
               onClick={() => setSelectedArticle(article)}
-              className={`absolute ${article.cardWidth} rounded-xl p-2 sm:p-3 md:p-4 shadow-lg animate-float pointer-events-auto text-left transition-all hover:scale-[1.02] ${
+              className={`absolute ${article.cardWidth} rounded-xl p-2 sm:p-3 md:p-4 shadow-lg animate-float pointer-events-auto text-left transition-all hover:scale-[1.02] max-sm:static max-sm:w-full max-sm:animate-none max-sm:p-4 ${
                 article.hiddenOnMobile ? 'hidden md:block' : 'block'
               } ${
                 isPrimary
@@ -807,8 +807,8 @@ const Slide8Content: React.FC = () => {
 
       {selectedArticle && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 pointer-events-auto">
-          <div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-4xl max-h-[92vh] overflow-hidden flex flex-col transition-colors">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl w-full max-w-4xl max-h-[92vh] overflow-hidden flex flex-col transition-colors max-sm:max-h-[96vh]">
+            <div className="flex items-center justify-between px-4 py-4 sm:px-6 border-b border-gray-200 dark:border-gray-800">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-blue-100 dark:bg-blue-950/40 rounded-lg flex items-center justify-center text-blue-500">
                   {React.createElement(getIcon(selectedArticle.type), { className: 'w-5 h-5', strokeWidth: 2 })}
@@ -826,7 +826,7 @@ const Slide8Content: React.FC = () => {
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-6">
+            <div className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 space-y-5 sm:space-y-6">
               <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950 p-4">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400">Kontekst</span>
                 <p className="mt-2 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{selectedArticle.contextSummary}</p>
@@ -892,14 +892,14 @@ const Slide8Content: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 px-6 py-4 border-t border-gray-200 dark:border-gray-800">
-              <button className="flex-1 h-10 px-4 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+            <div className="flex items-center gap-3 px-4 py-4 sm:px-6 border-t border-gray-200 dark:border-gray-800 max-sm:flex-col">
+              <button className="flex-1 h-10 px-4 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center gap-2 max-sm:w-full">
                 <Download className="w-4 h-4" strokeWidth={2} />
                 Preuzmi dokument
               </button>
               <button
                 onClick={() => setSelectedArticle(null)}
-                className="flex-1 h-10 px-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                className="flex-1 h-10 px-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors max-sm:w-full"
               >
                 Zatvori
               </button>
