@@ -24,6 +24,7 @@ class ContactRequestError extends Error {
 function readConfig(env = process.env) {
   return {
     publicKey: env.EMAILJS_PUBLIC_KEY,
+    privateKey: env.EMAILJS_PRIVATE_KEY,
     serviceId: env.EMAILJS_SERVICE_ID,
     templateId: env.EMAILJS_TEMPLATE_ID,
     autoReplyTemplateId: env.EMAILJS_AUTOREPLY_TEMPLATE_ID,
@@ -65,7 +66,7 @@ function validatePayload(payload) {
   );
 }
 
-async function sendEmail({ publicKey, serviceId, templateId, templateParams }) {
+async function sendEmail({ publicKey, privateKey, serviceId, templateId, templateParams }) {
   const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
     method: 'POST',
     headers: {
@@ -76,6 +77,7 @@ async function sendEmail({ publicKey, serviceId, templateId, templateParams }) {
       service_id: serviceId,
       template_id: templateId,
       template_params: templateParams,
+      ...(privateKey ? { accessToken: privateKey } : {}),
     }),
   });
 
@@ -118,6 +120,7 @@ export async function submitContactInquiry(body, env = process.env) {
 
   await sendEmail({
     publicKey: config.publicKey,
+    privateKey: config.privateKey,
     serviceId: config.serviceId,
     templateId: config.templateId,
     templateParams: payload,
@@ -126,6 +129,7 @@ export async function submitContactInquiry(body, env = process.env) {
   if (config.autoReplyTemplateId && payload.reply_to) {
     await sendEmail({
       publicKey: config.publicKey,
+      privateKey: config.privateKey,
       serviceId: config.serviceId,
       templateId: config.autoReplyTemplateId,
       templateParams: {
