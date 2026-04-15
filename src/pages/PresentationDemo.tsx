@@ -411,7 +411,7 @@ const slides = [
             Just<span className="text-blue-500">Improve</span>
           </h1>
           <p className="text-base sm:text-xl md:text-3xl text-gray-600 dark:text-white max-w-3xl mx-auto transition-colors">
-            Digitalno rešenje za <span className="text-blue-500 font-semibold">kontinualno unapređenje</span>
+            Digitalno rešenje za <span className="text-blue-500 font-semibold">kontinuirano unapređenje</span>
           </p>
         </div>
       </div>
