@@ -100,8 +100,8 @@ const coreToolCards = [
 
 const Slide13Integrations: React.FC = () => {
   return (
-    <div className="h-full overflow-hidden px-3 sm:px-4 py-3">
-      <div className="mx-auto flex h-full w-full max-w-7xl flex-col justify-center gap-4">
+    <div className="h-full overflow-y-auto px-3 sm:px-4 py-3">
+      <div className="mx-auto flex h-full w-full max-w-7xl flex-col justify-start gap-4">
         <div className="text-center space-y-2">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-800 dark:bg-blue-950/40 dark:text-blue-200">
             <PlugZap className="h-3.5 w-3.5" strokeWidth={2.2} />
@@ -116,7 +116,7 @@ const Slide13Integrations: React.FC = () => {
         </div>
 
         <div className="rounded-[32px] border border-slate-200 bg-gradient-to-br from-slate-50 via-white to-blue-50 p-4 sm:p-5 lg:p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] dark:border-slate-700 dark:from-slate-900 dark:via-slate-900 dark:to-blue-950/40">
-          <div className="grid gap-4 lg:hidden">
+          <div className="grid gap-4 xl:hidden">
             <div className="rounded-[28px] bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 p-5 text-white shadow-[0_20px_60px_rgba(15,23,42,0.22)]">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -173,7 +173,7 @@ const Slide13Integrations: React.FC = () => {
             </div>
           </div>
 
-          <div className="relative hidden min-h-[510px] lg:block">
+          <div className="relative hidden min-h-[510px] xl:block">
             <svg
               className="absolute inset-0 h-full w-full"
               viewBox="0 0 1000 610"

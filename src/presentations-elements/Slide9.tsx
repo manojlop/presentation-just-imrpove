@@ -52,8 +52,8 @@ const managementCapabilities = [
 
 const Slide9Content: React.FC = () => {
   return (
-    <div className="h-full overflow-hidden px-3 sm:px-4 py-2 sm:py-3">
-      <div className="w-full max-w-6xl h-full mx-auto flex flex-col justify-center gap-3 sm:gap-4">
+    <div className="h-full overflow-y-auto px-3 sm:px-4 py-2 sm:py-3">
+      <div className="w-full max-w-6xl h-full mx-auto flex flex-col justify-start gap-3 sm:gap-4">
         <div className="text-center space-y-1.5 sm:space-y-2">
           <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white transition-colors">
             Upravljanje kompanijom

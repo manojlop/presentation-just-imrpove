@@ -274,10 +274,10 @@ const challengeImpactCards = [
     eyebrow: 'Direktan gubitak',
     title: 'Kasno primecen prestanak rada masine',
     description: 'Saniranje tek jedan dan kasnije povlaci ozbiljan pad proizvodnje i direktan finansijski gubitak.',
-    details: ['1/3 masine van rada', '33% proizvodnje', '500.000 L/dan x 0.33 x €0.30/L prihoda'],
+    details: ['1/3 masine van rada', '33% proizvodnje', 'Znacajan dnevni pad prihoda'],
     impactLabel: 'Realan trosak zastoja',
-    impactValue: '~€10.000+',
-    impactNote: 'Samo izgubljeni profit pri 20% marze, bez uracunatog praznog hoda radnika',
+    impactValue: 'Visok direktan trosak',
+    impactNote: 'Izgubljeni profit i pad efikasnosti, bez uracunatog praznog hoda radnika',
   },
   {
     icon: ShieldAlert,
@@ -286,7 +286,7 @@ const challengeImpactCards = [
     description: 'Jedan previd moze da preraste u povredu, kaznu i prekid procesa koji dodatno povecava trosak.',
     details: ['Povreda radnika', 'Kazna i inspekcija', 'Prestanak rada'],
     impactLabel: 'Ukupan udar',
-    impactValue: '~€10.000+',
+    impactValue: 'Visok direktan trosak',
     impactNote: 'Direktan trosak incidenta pre nego sto uracunamo reputacioni i organizacioni efekat.',
   },
   {
@@ -296,7 +296,7 @@ const challengeImpactCards = [
     description: 'Kada kljucno tribalno znanje ostane kod jednog coveka, tim ulazi u period sporijeg rada i dodatnog treninga.',
     details: ['Pad efikasnosti 20-50%', 'Onboarding i new hire', 'Trening i uvodjenje u posao'],
     impactLabel: 'Organizacioni trosak',
-    impactValue: '~€5.000+',
+    impactValue: 'Srednje do visok opterecujuci trosak',
     impactNote: 'Gubitak efikasnosti plus trosak uvodjenja zamene dok se znanje prenosi.',
   },
 ];
@@ -340,30 +340,30 @@ const solutionOutcomeCards = [
     eyebrow: 'Pouzdanost i odziv',
     title: 'Manje downtime-a i brza reakcija',
     description: 'Tagovi, akcije i rutine ubrzavaju detekciju i plansko zatvaranje uzroka.',
-    details: ['Downtime ↓ 20-50%', 'Vreme reakcije ↓ 2-5x', 'Ponavljajuci kvarovi ↓ 30%'],
+    details: ['20-50% manje downtime-a', '2-5x brza reakcija tima', '30% manje ponavljajucih kvarova'],
     impactLabel: 'Tacan efekat na ponovljeni kvar',
-    impactValue: '~€3.000+',
-    impactNote: 'Kod kvara od ~€10.000+, 30% manje ponavljanja vraca ~€3.000+.',
+    impactValue: 'Merljivo smanjenje gubitaka',
+    impactNote: 'Manje ponavljanja kvara direktno smanjuje operativne gubitke.',
   },
   {
     icon: ShieldCheck,
     eyebrow: 'Bezbednost i uskladjenost',
     title: 'Manje incidenata, manje teških posledica',
     description: 'Brza prijava rizika i jasna eskalacija smanjuju sansu za skuplji incident.',
-    details: ['Incidenti ↓ 30-70%', 'Brza eskalacija i dokumentacija'],
+    details: ['30-70% manje incidenata', 'Brza eskalacija i uredna dokumentacija'],
     impactLabel: 'Direktno smanjenje troska',
-    impactValue: '~€3.000-€7.000+',
-    impactNote: 'Kod incidenta od ~€10.000+, pad ucestalosti od 30-70% vraca ~€3.000-€7.000+.',
+    impactValue: 'Merljivo smanjenje posledica',
+    impactNote: 'Pad ucestalosti incidenata znacajno umanjuje direktne i indirektne troskove.',
   },
   {
     icon: UserCheck,
     eyebrow: 'Ljudi i znanje',
     title: 'Brzi onboarding i manja zavisnost od pojedinaca',
     description: 'Baza znanja i standardizovan tok rada skracuju uvodjenje u posao kada kljucna osoba nije dostupna.',
-    details: ['Onboarding brzi 30-50%', 'Zavisnost od pojedinaca ↓'],
+    details: ['30-50% brzi onboarding', 'Manja zavisnost od pojedinaca'],
     impactLabel: 'Povrat po kriticnoj zameni',
-    impactValue: '~€1.500-€2.500+',
-    impactNote: 'Kod troska od ~€5.000+, 30-50% brzi onboarding vraca ~€1.500-€2.500+.',
+    impactValue: 'Brzi operativni oporavak tima',
+    impactNote: 'Brzi onboarding skracuje period smanjene efikasnosti i ubrzava stabilizaciju rada.',
   },
 ];
 
@@ -427,11 +427,10 @@ const slides = [
           <div className="text-center space-y-1 sm:space-y-2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white transition-colors">Izazovi</h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-white transition-colors px-2">Sa cim se fabrike danas suocavaju i koliko ih to realno kosta?</p>
-            <p className="text-xs sm:text-sm font-medium text-red-600 dark:text-red-300 transition-colors px-2">Sve navedene cifre su po incidentu.</p>
           </div>
           
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-4">
-            {challengeImpactCards.map(({ icon: Icon, eyebrow, title, description, details, impactLabel, impactValue, impactNote }) => (
+            {challengeImpactCards.map(({ icon: Icon, eyebrow, title, description, details }) => (
               <div
                 key={title}
                 className="rounded-2xl border border-red-200 bg-gradient-to-br from-red-50 via-white to-orange-50 p-4 sm:p-5 shadow-sm transition-colors dark:border-red-900/70 dark:from-red-950/40 dark:via-gray-900 dark:to-orange-950/20"
@@ -452,21 +451,20 @@ const slides = [
                   {description}
                 </p>
 
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-4">
+                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-red-700 dark:text-red-300">
+                    Kljucne posledice
+                  </p>
+                  <div className="flex flex-wrap gap-2.5">
                   {details.map((detail) => (
                     <span
                       key={detail}
-                      className="rounded-full border border-red-200 bg-white/90 px-2.5 py-1 text-xs font-medium text-gray-700 dark:border-red-900/70 dark:bg-gray-900/70 dark:text-gray-200"
+                      className="rounded-full border border-red-300 bg-red-100/80 px-3 py-1.5 text-[12px] font-semibold text-red-900 shadow-sm dark:border-red-800 dark:bg-red-900/40 dark:text-red-100"
                     >
                       {detail}
                     </span>
                   ))}
                 </div>
-
-                <div className="mt-4 rounded-xl bg-gray-950 px-4 py-3 text-white dark:bg-gray-950/90">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-200">{impactLabel}</div>
-                  <div className="mt-1 text-2xl font-bold text-red-400 dark:text-red-300">{impactValue}</div>
-                  <p className="mt-1 text-xs leading-relaxed text-gray-300">{impactNote}</p>
                 </div>
               </div>
             ))}
@@ -508,11 +506,11 @@ const slides = [
             <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-white transition-colors px-2">
               JustImprove ne donosi samo vidljivost, vec merljivo smanjuje trosak, rizik i zavisnost od haosa
             </p>
-            <p className="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300 transition-colors px-2">Prikazane cifre predstavljaju direktan efekat po incidentu ili po kriticnoj situaciji.</p>
+            <p className="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300 transition-colors px-2">Prikazani efekti predstavljaju direktan operativni uticaj po incidentu ili kriticnoj situaciji.</p>
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 sm:gap-4">
-            {solutionOutcomeCards.map(({ icon: Icon, eyebrow, title, description, details, impactLabel, impactValue, impactNote }) => (
+            {solutionOutcomeCards.map(({ icon: Icon, eyebrow, title, description, details }) => (
               <div
                 key={title}
                 className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-cyan-50 p-4 sm:p-5 shadow-sm transition-colors dark:border-emerald-900/70 dark:from-emerald-950/40 dark:via-gray-900 dark:to-cyan-950/20"
@@ -533,21 +531,20 @@ const slides = [
                   {description}
                 </p>
 
-                <div className="mt-4 flex flex-wrap gap-2">
+                <div className="mt-4">
+                  <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300">
+                    Kljucni efekti
+                  </p>
+                  <div className="flex flex-wrap gap-2.5">
                   {details.map((detail) => (
                     <span
                       key={detail}
-                      className="rounded-full border border-emerald-200 bg-white/90 px-2.5 py-1 text-xs font-medium text-gray-700 dark:border-emerald-900/70 dark:bg-gray-900/70 dark:text-gray-200"
+                      className="rounded-full border border-emerald-300 bg-emerald-100/80 px-3 py-1.5 text-[12px] font-semibold text-emerald-900 shadow-sm dark:border-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-100"
                     >
                       {detail}
                     </span>
                   ))}
                 </div>
-
-                <div className="mt-4 rounded-xl bg-gray-950 px-4 py-3 text-white dark:bg-gray-950/90">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-emerald-200">{impactLabel}</div>
-                  <div className="mt-1 text-2xl font-bold text-emerald-300">{impactValue}</div>
-                  <p className="mt-1 text-xs leading-relaxed text-gray-300">{impactNote}</p>
                 </div>
               </div>
             ))}
@@ -558,15 +555,15 @@ const slides = [
               <div className="space-y-1">
                 <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-blue-100">
                   <Zap className="h-3.5 w-3.5" strokeWidth={2.2} />
-                  Ukupan ROI potencijal
+                  Zasto sada
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold">~€30.000-€50.000+ godisnjeg direktnog povrata</h3>
-                <p className="text-sm text-blue-100/90">Aproksimacija na godisnjem nivou, uz 1 smanjen / sprecen scenario mesecno.</p>
+                <h3 className="text-xl sm:text-2xl font-bold">Uredi proces jednom, smanji haos svakog dana</h3>
+                <p className="text-sm text-blue-100/90">JustImprove pretvara prijave i probleme u jasan tok rada, odgovornost i brzu realizaciju.</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
-                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Konzervativna procena zasnovana na tri tipicna scenarija kroz 12 meseci</div>
-                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Bez uracunatog praznog hoda, reputacije, manjeg turnover-a i sirih organizacionih efekata</div>
-                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Stvarni ROI raste kako raste broj prijava, smena, linija i lokacija</div>
+                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Svaka prijava dobija vlasnika, rok i jasan status bez gubljenja u porukama i tabelama.</div>
+                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Znanje ostaje u sistemu, pa tim ne zavisi od jedne osobe koja "zna kako se to radi".</div>
+                <div className="rounded-xl bg-white/10 px-3 py-2 text-blue-50">Laksa kontrola procesa kroz jednu platformu koju menadzment i operativa razumeju na prvi pogled.</div>
               </div>
             </div>
           </div>

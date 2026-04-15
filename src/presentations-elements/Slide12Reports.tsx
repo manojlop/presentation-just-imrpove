@@ -505,7 +505,7 @@ const Slide12Reports: React.FC = () => {
   ];
 
   return (
-    <div className="h-full overflow-hidden px-3 py-4 sm:px-6">
+    <div className="h-full overflow-y-auto px-3 py-4 sm:px-6">
       <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-3 rounded-[2rem] border border-slate-200/80 bg-gradient-to-br from-white via-slate-50 to-blue-50/50 p-4 shadow-[0_28px_90px_rgba(15,23,42,0.10)] transition-colors dark:border-slate-700 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 sm:p-5">
         <div className="shrink-0 flex items-center justify-center">
           <div className="space-y-1 text-center">

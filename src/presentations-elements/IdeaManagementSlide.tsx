@@ -56,8 +56,8 @@ const deliveryModes = ['Projekat', 'Nalog za realizaciju', 'Realizovano'];
 
 const IdeaManagementSlide: React.FC = () => {
   return (
-    <div className="h-full w-full flex items-center justify-center px-3 sm:px-8 py-4 overflow-hidden">
-      <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-center min-h-0">
+    <div className="h-full w-full flex items-start justify-center px-3 sm:px-8 py-4 overflow-y-auto">
+      <div className="w-full max-w-7xl mx-auto h-full flex flex-col justify-start min-h-0">
         <div className="mb-3 sm:mb-5 flex-shrink-0 text-center xl:text-left">
           <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-amber-800">
             <Lightbulb className="w-3.5 h-3.5" strokeWidth={2} />
@@ -65,7 +65,7 @@ const IdeaManagementSlide: React.FC = () => {
           </div>
           <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white transition-colors">Predlozi i upravljanje idejama</h2>
           <p className="mt-2 max-w-4xl text-sm sm:text-lg text-gray-600 dark:text-white transition-colors">
-            Predlog vise nije deo tagova. Dobija svoj tok: od prijave ideje, preko evaluacije i scoring-a, do realizacije kroz projekat ili nalog.
+            Svaka ideja ima svoj jasan put: od prijave i dopune detalja, preko procene vrednosti i prioriteta (scoring), do realizacije - kao projekat ili akcija. Tim u svakom koraku vidi status i zna sta sledi.
           </p>
         </div>
 

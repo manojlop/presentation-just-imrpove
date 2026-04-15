@@ -62,8 +62,8 @@ const searchMoments = [
 
 const SlideKnowledgeCapture: React.FC = () => {
   return (
-    <div className="h-full overflow-hidden px-3 sm:px-4 py-3">
-      <div className="mx-auto flex h-full w-full max-w-7xl flex-col justify-center gap-4">
+    <div className="h-full overflow-y-auto px-3 sm:px-4 py-3">
+      <div className="mx-auto flex h-full w-full max-w-7xl flex-col justify-start gap-4">
         <div className="text-center space-y-2">
           <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-800">
             <Sparkles className="h-3.5 w-3.5" strokeWidth={2} />
